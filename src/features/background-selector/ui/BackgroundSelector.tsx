@@ -1,7 +1,6 @@
-// features/background-selector/ui/BackgroundSelector.tsx
 import React from 'react';
-import {BACKGROUND_OPTIONS} from '../../../shared/config/constants';
-import {BackgroundOption} from '../model/types';
+import { BACKGROUND_OPTIONS } from '../../../shared/config/constants';
+import { BackgroundOption } from '../model/types';
 import styles from './BackgroundSelector.module.css';
 
 interface BackgroundSelectorProps {
@@ -11,10 +10,10 @@ interface BackgroundSelectorProps {
 }
 
 export const BackgroundSelector: React.FC<BackgroundSelectorProps> = ({
-                                                                          value,
-                                                                          onChange,
-                                                                          className
-                                                                      }) => {
+    value,
+    onChange,
+    className
+}) => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         onChange(event.target.value as BackgroundOption);
     };
@@ -36,6 +35,15 @@ export const BackgroundSelector: React.FC<BackgroundSelectorProps> = ({
                     </option>
                 ))}
             </select>
+            <div className={styles.preview}>
+                <div 
+                    className={styles.previewColor}
+                    style={{ 
+                        backgroundColor: BACKGROUND_OPTIONS.find(bg => bg.value === value)?.background || 'transparent'
+                    }}
+                    title={`Preview: ${BACKGROUND_OPTIONS.find(bg => bg.value === value)?.label}`}
+                />
+            </div>
         </div>
     );
 };
